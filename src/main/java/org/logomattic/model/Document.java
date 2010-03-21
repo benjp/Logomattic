@@ -19,10 +19,14 @@
 
 package org.logomattic.model;
 
+import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
+
+import java.io.InputStream;
+import java.util.Date;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -38,4 +42,24 @@ public abstract class Document extends File
    public abstract Content getContent();
 
    public abstract void setContent(Content content);
+
+   @Create
+   protected abstract Content createContent();
+
+   public void update(String mimeType, InputStream data)
+   {
+      Content content = getContent();
+
+      //
+      if (content == null)
+      {
+         content = createContent();
+         setContent(content);
+      }
+
+      //
+      content.setData(data);
+      content.setMimeType(mimeType);
+      content.setLastModified(new Date());
+   }
 }

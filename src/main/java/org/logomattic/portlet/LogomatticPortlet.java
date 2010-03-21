@@ -19,7 +19,6 @@
 
 package org.logomattic.portlet;
 
-import org.apache.commons.fileupload.DefaultFileItemFactory;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
@@ -118,13 +117,17 @@ public class LogomatticPortlet extends GenericPortlet
                String name = image.getName();
 
                //
-               if (dir.getDocument(name) != null)
-               {
-                  dir.removeFile(name);
-               }
+               Document doc = dir.getDocument(name);
 
                //
-               dir.addDocument(name, image.getContentType(), image.getInputStream());
+               if (doc != null)
+               {
+                  doc.update(image.getContentType(), image.getInputStream());
+               }
+               else
+               {
+                  dir.addDocument(name, image.getContentType(), image.getInputStream());
+               }
 
                //
                session.save();

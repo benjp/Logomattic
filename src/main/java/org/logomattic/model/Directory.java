@@ -25,7 +25,6 @@ import org.chromattic.api.annotations.PrimaryType;
 
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -47,9 +46,6 @@ public abstract class Directory extends File
 
    @Create
    protected abstract Directory createDirectory();
-
-   @Create
-   protected abstract Content createContent();
 
    public Collection<File> getFiles()
    {
@@ -82,11 +78,7 @@ public abstract class Directory extends File
    {
       Document doc = createDocument();
       getFileMap().put(name, doc);
-      Content content = createContent();
-      doc.setContent(content);
-      content.setData(data);
-      content.setMimeType(mimeType);
-      content.setLastModified(new Date());
+      doc.update(mimeType, data);
       return doc;
    }
 }
