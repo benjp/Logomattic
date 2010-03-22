@@ -10,28 +10,24 @@
     String title = model.getTitle();
 %>
 
-
-<%
-    if (url != null)
-    {
-%>
+<% if (url != null) { %>
     <img src="<%= url %>" alt=""/>
-<%
-    }
-%>
+<% } %>
 
 <table >
 <%
-
     Directory root = model.getRoot();
-    for (Document doc : root.getDocuments())
-    {
+    for (Document doc : root.getDocuments()) {
         String imageURL = model.getImageURL(doc);
         String useURL = model.getUseImageURL(doc);
         String removeURL = model.getRemoveImageURL(doc);
     %>
     <tr>
+        <% if (model.isInUse(doc)) { %>
+        <td><%= doc.getName() %></td>
+        <% } else  { %>
         <td><a href="<%= useURL %>"><%= doc.getName() %></a></td>
+        <% } %>
         <td><a href="<%= imageURL %>" target="_blank">View</a></td>
         <td><a href="<%= removeURL %>">Remove</a></td>
     </tr>

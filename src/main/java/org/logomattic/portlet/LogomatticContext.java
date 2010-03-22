@@ -103,6 +103,13 @@ public class LogomatticContext extends Model
       return url;
    }
 
+   public boolean isInUse(Document doc)
+   {
+      PortletPreferences prefs = request.getPreferences();
+      String url = prefs.getValue("url", null);
+      return doc.getId().equals(url);
+   }
+
    public void save(FileItem image) throws IOException
    {
       getRoot().save(image.getName(), image.getContentType(), image.getInputStream());
