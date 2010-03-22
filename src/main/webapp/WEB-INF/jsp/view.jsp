@@ -9,7 +9,7 @@
     String title = model.getTitle();
 %>
 
-<div class="UILogoPortlet ClearFix">
+<div class="UILogomatticPortlet ClearFix">
    <a href="#" class="Img"><img src="<%= url %>" alt=""/></a>
    <div class="BannerTitle"><%= title %></div>
 </div>

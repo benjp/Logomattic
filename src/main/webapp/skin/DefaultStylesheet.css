@@ -1,0 +1,45 @@
+.UILogomatticPortlet {
+	zoom: 100%;
+	padding: 5px;
+	line-height: 38px;
+}
+
+.ClearFix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.ClearFix {
+	!display: inline-block;
+  !zoom: 1;
+  !display: block;
+}
+
+.UILogomatticPortlet .Img img {
+	height: 38px;
+}
+
+.UILogomatticPortlet .Img,.UILogomatticPortlet .BannerTitle {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	color: #3c3c3c;
+	font-size: 17px;
+}
+
+.UILogomatticPortlet a {
+	color: white;
+	outline: none;
+	margin: 0 8px;
+	font-weight: bold;
+}
+
+.UILogomatticPortlet a:hover {
+	color: #e7e7e7;
+}
+
+.UILogomatticPortlet .Name {
+	color: #666666;
+}
