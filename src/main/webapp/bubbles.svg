@@ -20,7 +20,7 @@
    enable-background="new 0 0 256.463 269.104"
    xml:space="preserve"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="logomattic.svg"
+   sodipodi:docname="bubbles.svg"
    style="display:inline"
    inkscape:export-filename="/Users/julien/logomattic.png"
    inkscape:export-xdpi="81.973404"
@@ -209,7 +209,7 @@
    showgrid="false"
    units="cm"
    inkscape:zoom="1.2402432"
-   inkscape:cx="344.89418"
+   inkscape:cx="195.32674"
    inkscape:cy="47.038409"
    inkscape:window-x="508"
    inkscape:window-y="104"
@@ -223,7 +223,8 @@
      snapvisiblegridlinesonly="true" /></sodipodi:namedview>
 <g
    id="g2972"
-   transform="translate(24.084031,11.291724)">
+   transform="translate(24.084031,11.291724)"
+   style="opacity:0.7">
 	<linearGradient
    id="SVGID_1_"
    gradientUnits="userSpaceOnUse"
@@ -281,7 +282,7 @@
    d="m 139.68,43.667999 c 0,22.827586 -18.50541,41.333 -41.333,41.333 -22.827586,0 -41.333,-18.505414 -41.333,-41.333 0,-22.827585 18.505414,-41.3329999 41.333,-41.3329999 22.82759,0 41.333,18.5054149 41.333,41.3329999 z" />
 	<g
    id="g2988"
-   style="opacity:0.5">
+   style="opacity:0.50000000000000000">
 		<path
    d="m 128.217,24.566 c -1.471,1.495 -2.941,2.989 -4.412,4.482 -6.232,-6.137 -14.717,-10.02 -24.152,-10.276 0.057,-2.096 0.113,-4.193 0.17,-6.289 11.093,0.302 21.066,4.867 28.394,12.083 z"
    id="path2990"
@@ -302,7 +303,8 @@
 </g>
 <g
    id="g2998"
-   transform="translate(10.400777,-24.056767)">
+   transform="translate(10.400777,-24.056767)"
+   style="opacity:0.7">
 	<linearGradient
    id="SVGID_3_"
    gradientUnits="userSpaceOnUse"
@@ -359,7 +361,7 @@
    d="m 96,111.484 c 0,22.82759 -18.505415,41.333 -41.333,41.333 -22.827586,0 -41.333,-18.50541 -41.333,-41.333 0,-22.827585 18.505414,-41.332999 41.333,-41.332999 22.827585,0 41.333,18.505414 41.333,41.332999 z" />
 	<g
    id="g3014"
-   style="opacity:0.5">
+   style="opacity:0.50000000000000000">
 		<path
    d="m 84.537,92.383 c -1.471,1.495 -2.941,2.989 -4.412,4.482 -6.232,-6.137 -14.717,-10.02 -24.152,-10.276 0.057,-2.096 0.113,-4.193 0.17,-6.289 11.093,0.302 21.066,4.866 28.394,12.083 z"
    id="path3016"
@@ -380,7 +382,8 @@
 </g>
 <g
    id="g3024"
-   transform="translate(-65.997395,3.3097242)">
+   transform="translate(-65.997395,3.3097242)"
+   style="opacity:0.7">
 	<linearGradient
    id="SVGID_5_"
    gradientUnits="userSpaceOnUse"
@@ -437,7 +440,7 @@
    d="m 243.12701,111.484 c 0,22.82759 -18.50542,41.333 -41.333,41.333 -22.82759,0 -41.333,-18.50541 -41.333,-41.333 0,-22.827585 18.50541,-41.332999 41.333,-41.332999 22.82758,0 41.333,18.505414 41.333,41.332999 z" />
 	<g
    id="g3040"
-   style="opacity:0.5">
+   style="opacity:0.50000000000000000">
 		<path
    d="m 231.664,92.383 c -1.471,1.495 -2.941,2.989 -4.412,4.482 -6.232,-6.137 -14.717,-10.02 -24.152,-10.276 0.057,-2.096 0.113,-4.193 0.17,-6.289 11.093,0.302 21.066,4.866 28.394,12.083 z"
    id="path3042"
