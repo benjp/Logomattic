@@ -37,11 +37,6 @@ public class Model
       this.session = session;
    }
 
-   public Model(Chromattic chromattic)
-   {
-      this.session = chromattic.openSession();
-   }
-
    public Directory getRoot()
    {
       Directory root = session.findByPath(Directory.class, "logomattic");

@@ -39,6 +39,9 @@ public class LogomatticContext extends Model
 {
 
    /** . */
+   private static final String WORKSPACE_NAME = "portal-work";
+
+   /** . */
    private PortletRequest request;
 
    /** . */
@@ -46,7 +49,7 @@ public class LogomatticContext extends Model
 
    public LogomatticContext(Chromattic chromattic, PortletRequest request, PortletResponse response)
    {
-      super(chromattic);
+      super(chromattic.openSession(WORKSPACE_NAME));
 
       //
       this.request = request;
@@ -78,7 +81,7 @@ public class LogomatticContext extends Model
    public String getImageURL(Document doc)
    {
       String path = doc.getPath();
-      return "/rest/jcr/repository/portal-system" + path;
+      return "/rest/jcr/repository/" + WORKSPACE_NAME + path;
    }
 
    public String getImageURL()
