@@ -76,7 +76,7 @@ public class LogomatticPortlet extends GenericPortlet
    @Override
    public void processAction(ActionRequest request, ActionResponse response) throws PortletException, IOException
    {
-      Model model = new Model(chromattic);
+      LogomatticContext model = new LogomatticContext(chromattic, request, response);
       try
       {
          if (PortletFileUpload.isMultipartContent(request))
@@ -107,8 +107,7 @@ public class LogomatticPortlet extends GenericPortlet
             //
             if (image != null)
             {
-               model.getRoot().save(image);
-               model.save();
+               model.save(image);
             }
          }
          else

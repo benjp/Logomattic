@@ -70,11 +70,6 @@ public abstract class Directory extends File
       return getDocumentMap().values();
    }
 
-   public void save(FileItem image) throws IOException
-   {
-      save(image.getName(), image.getContentType(), image.getInputStream());
-   }
-
    public void save(String name, String mimeType, byte[] data)
    {
       save(name, mimeType, new ByteArrayInputStream(data));

@@ -19,6 +19,7 @@
 
 package org.logomattic.portlet;
 
+import org.apache.commons.fileupload.FileItem;
 import org.chromattic.api.Chromattic;
 import org.logomattic.model.Document;
 import org.logomattic.model.Model;
@@ -28,6 +29,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;
+import java.io.IOException;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -99,5 +101,11 @@ public class LogomatticContext extends Model
           url = "http://www.nmpp.fr/reseau/animquot/images/logo_bilto.jpg";
       }
       return url;
+   }
+
+   public void save(FileItem image) throws IOException
+   {
+      getRoot().save(image.getName(), image.getContentType(), image.getInputStream());
+      save();
    }
 }
