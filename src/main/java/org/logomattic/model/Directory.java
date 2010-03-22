@@ -19,10 +19,13 @@
 
 package org.logomattic.model;
 
+import org.apache.commons.fileupload.FileItem;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.PrimaryType;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
@@ -65,6 +68,31 @@ public abstract class Directory extends File
    public Collection<Document> getDocuments()
    {
       return getDocumentMap().values();
+   }
+
+   public void save(FileItem image) throws IOException
+   {
+      save(image.getName(), image.getContentType(), image.getInputStream());
+   }
+
+   public void save(String name, String mimeType, byte[] data)
+   {
+      save(name, mimeType, new ByteArrayInputStream(data));
+   }
+
+   public void save(String name, String mimeType, InputStream data)
+   {
+      Document doc = getDocument(name);
+
+      //
+      if (doc != null)
+      {
+         doc.update(mimeType, data);
+      }
+      else
+      {
+         addDocument(name, mimeType, data);
+      }
    }
 
    public Directory addDirectory(String name)

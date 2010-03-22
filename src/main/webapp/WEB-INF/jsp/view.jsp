@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ page import="javax.portlet.PortletPreferences" %>
-<%@ page import="org.chromattic.api.*" %>
+<%@ page import="org.logomattic.model.Model" %>
 <%@ page import="org.logomattic.model.Document" %>
 
 <portlet:defineObjects/>
@@ -12,11 +12,11 @@
     {
         if (!url.startsWith("http://"))
         {
-            ChromatticSession csession = (ChromatticSession)request.getAttribute("session");
-            Document doc = csession.findById(Document.class, url);
+            Model model = (Model)request.getAttribute("model");
+            Document doc = model.findDocumentById(url);
             if (doc != null)
             {
-                String path = csession.getPath(doc);
+                String path = doc.getPath();
                 url = "/rest/jcr/repository/portal-system" + path;
             }
         }

@@ -28,6 +28,7 @@ import org.logomattic.model.Content;
 import org.logomattic.model.Directory;
 import org.logomattic.model.Document;
 import org.logomattic.model.File;
+import org.logomattic.model.Model;
 
 import java.io.ByteArrayInputStream;
 
@@ -60,9 +61,9 @@ public class ModelTestCase extends TestCase
 
    public void testSimple() throws Exception
    {
-
       ChromatticSession session = chromattic.openSession();
 
+      //
       Directory dir = session.insert(Directory.class, "logos");
       assertEquals("logos", dir.getName());
       assertEquals(0, dir.getFiles().size());
@@ -75,6 +76,20 @@ public class ModelTestCase extends TestCase
       assertEquals(1, dir.getFiles().size());
       assertTrue(dir.getFiles().contains(logo));
 
+      //
       session.close();
    }
+
+   public void testBilto()
+   {
+      Model model = new Model(chromattic);
+
+      model.getRoot().save("1", "image/png", new byte[]{0,1,2});
+
+      model.save();
+
+      model.close();
+   }
+
+
 }

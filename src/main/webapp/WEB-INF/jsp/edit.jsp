@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ page import="org.chromattic.api.*" %>
 <%@ page import="org.logomattic.model.*" %>
 <%@ page import="javax.portlet.PortletURL" %>
 
@@ -8,14 +7,9 @@
 <table >
 <%
 
-    ChromatticSession csession = (ChromatticSession)request.getAttribute("session");  
-    Directory dir = csession.findByPath(Directory.class, "logomattic");
-    if (dir == null)
-    {
-        dir = csession.insert(Directory.class, "logomattic");
-        csession.save();
-    }
-    for (Document doc : dir.getDocuments())
+    Model model = (Model)request.getAttribute("model");
+    Directory root = model.getRoot();
+    for (Document doc : root.getDocuments())
     {
         PortletURL useURL = renderResponse.createActionURL();
         useURL.setParameter("docid", doc.getId());

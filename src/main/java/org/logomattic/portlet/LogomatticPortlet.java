@@ -26,12 +26,12 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.portlet.PortletFileUpload;
 import org.chromattic.api.Chromattic;
 import org.chromattic.api.ChromatticBuilder;
-import org.chromattic.api.ChromatticSession;
 import org.logomattic.integration.CurrentRepositoryLifeCycle;
 import org.logomattic.model.Content;
 import org.logomattic.model.Directory;
 import org.logomattic.model.Document;
 import org.logomattic.model.File;
+import org.logomattic.model.Model;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -75,7 +75,7 @@ public class LogomatticPortlet extends GenericPortlet
    @Override
    public void processAction(ActionRequest request, ActionResponse response) throws PortletException, IOException
    {
-      ChromatticSession session = chromattic.openSession();
+      Model model = new Model(chromattic);
       try
       {
          if (PortletFileUpload.isMultipartContent(request))
@@ -106,31 +106,8 @@ public class LogomatticPortlet extends GenericPortlet
             //
             if (image != null)
             {
-               Directory dir = session.findByPath(Directory.class, "logomattic");
-               if (dir == null)
-               {
-                   dir = session.insert(Directory.class, "logomattic");
-                   session.save();
-               }
-
-               //
-               String name = image.getName();
-
-               //
-               Document doc = dir.getDocument(name);
-
-               //
-               if (doc != null)
-               {
-                  doc.update(image.getContentType(), image.getInputStream());
-               }
-               else
-               {
-                  dir.addDocument(name, image.getContentType(), image.getInputStream());
-               }
-
-               //
-               session.save();
+               model.getRoot().save(image);
+               model.save();
             }
          }
          else
@@ -159,12 +136,7 @@ public class LogomatticPortlet extends GenericPortlet
                   }
 
                   //
-                  Document doc = session.findById(Document.class, docId);
-                  if (doc != null)
-                  {
-                     session.remove(doc);
-                     session.save();
-                  }
+                  model.remove(docId);
                }
             }
             else if ("title".equals(action))
@@ -181,25 +153,25 @@ public class LogomatticPortlet extends GenericPortlet
       }
       finally
       {
-         session.close();
+         model.close();
       }
    }
 
    @Override
    public void render(RenderRequest request, RenderResponse response) throws PortletException, IOException
    {
-      ChromatticSession session = chromattic.openSession();
+      Model model = new Model(chromattic);
 
       //
       try
       {
-         request.setAttribute("session", session);
+         request.setAttribute("model", model);
          super.render(request, response);
       }
       finally
       {
-         request.removeAttribute("session");
-         session.close();
+         request.removeAttribute("model");
+         model.close();
       }
    }
 

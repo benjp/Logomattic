@@ -22,6 +22,7 @@ package org.logomattic.model;
 import org.chromattic.api.annotations.Id;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.Name;
+import org.chromattic.api.annotations.Path;
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
 
@@ -38,6 +39,9 @@ public abstract class File
    @Id
    public abstract String getId();
 
+   @Path
+   public abstract String getPath();
+
    @Name
    public abstract String getName();
 
@@ -46,5 +50,4 @@ public abstract class File
 
    @Property(name = "jcr:created")
    public abstract Date getCreated();
-
 }
