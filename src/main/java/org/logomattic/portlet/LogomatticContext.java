@@ -59,7 +59,7 @@ public class LogomatticContext extends Model
    public String getTitle()
    {
       PortletPreferences prefs = request.getPreferences();
-      return prefs.getValue("title", "&nbsp;");
+      return prefs.getValue("title", "Logomattic");
    }
 
    public String getUseImageURL(Document doc)
@@ -88,20 +88,17 @@ public class LogomatticContext extends Model
    {
       PortletPreferences prefs = request.getPreferences();
       String url = prefs.getValue("url", null);
-      if (url != null)
+      if (url == null)
       {
-          if (!url.startsWith("http://"))
-          {
-              Document doc = findDocumentById(url);
-              if (doc != null)
-              {
-                  url = getImageURL(doc);
-              }
-          }
+         url = request.getContextPath() + "/bubbles.png";
       }
-      else
+      else if (!url.startsWith("http://"))
       {
-          url = "http://www.nmpp.fr/reseau/animquot/images/logo_bilto.jpg";
+          Document doc = findDocumentById(url);
+          if (doc != null)
+          {
+              url = getImageURL(doc);
+          }
       }
       return url;
    }
