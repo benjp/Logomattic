@@ -1,32 +1,12 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ page import="javax.portlet.PortletPreferences" %>
-<%@ page import="org.logomattic.model.Model" %>
-<%@ page import="org.logomattic.model.Document" %>
+<%@ page import="org.logomattic.portlet.LogomatticContext" %>
 
 <portlet:defineObjects/>
 
 <%
-    PortletPreferences prefs = renderRequest.getPreferences();
-    String url = prefs.getValue("url", null);
-    if (url != null)
-    {
-        if (!url.startsWith("http://"))
-        {
-            Model model = (Model)request.getAttribute("model");
-            Document doc = model.findDocumentById(url);
-            if (doc != null)
-            {
-                String path = doc.getPath();
-                url = "/rest/jcr/repository/portal-system" + path;
-            }
-        }
-    }
-    else
-    {
-        url = "http://www.nmpp.fr/reseau/animquot/images/logo_bilto.jpg";
-    }
-
-    String title = prefs.getValue("title", "&nbsp;");
+    LogomatticContext model = (LogomatticContext)request.getAttribute("model");
+    String url = model.getImageURL();
+    String title = model.getTitle();
 %>
 
 <div class="UILogoPortlet ClearFix">

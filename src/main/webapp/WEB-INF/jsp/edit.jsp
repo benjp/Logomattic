@@ -1,26 +1,38 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ page import="org.logomattic.model.*" %>
-<%@ page import="javax.portlet.PortletURL" %>
+<%@ page import="org.logomattic.portlet.LogomatticContext" %>
 
 <portlet:defineObjects/>
+
+<%
+    LogomatticContext model = (LogomatticContext)request.getAttribute("model");
+    String url = model.getImageURL();
+    String title = model.getTitle();
+%>
+
+
+<%
+    if (url != null)
+    {
+%>
+    <img src="<%= url %>" alt=""/>
+<%
+    }
+%>
 
 <table >
 <%
 
-    Model model = (Model)request.getAttribute("model");
     Directory root = model.getRoot();
     for (Document doc : root.getDocuments())
     {
-        PortletURL useURL = renderResponse.createActionURL();
-        useURL.setParameter("docid", doc.getId());
-        useURL.setParameter("action", "use");
-        PortletURL removeURL = renderResponse.createActionURL();
-        removeURL.setParameter("action", "remove");
-        removeURL.setParameter("docid", doc.getId());
+        String imageURL = model.getImageURL(doc);
+        String useURL = model.getUseImageURL(doc);
+        String removeURL = model.getRemoveImageURL(doc);
     %>
     <tr>
         <td><a href="<%= useURL %>"><%= doc.getName() %></a></td>
-        <td><a href="/rest/jcr/repository/portal-system/logomattic/<%= doc.getName()%>">View</a></td>
+        <td><a href="<%= imageURL %>" target="_blank">View</a></td>
         <td><a href="<%= removeURL %>">Remove</a></td>
     </tr>
     <%
@@ -31,7 +43,7 @@
 
 <form action="<%= renderResponse.createActionURL() %>" method="POST">
 <input type="hidden" name="action" value="title"/>
-Title: <input name="title" type="text" value="<%= renderRequest.getPreferences().getValue("title", "&nbsp;") %>"/><br/>
+Title: <input name="title" type="text" value="<%= title %>"/><br/>
 <input type="submit" value="Change the title"/>
 </form>
 

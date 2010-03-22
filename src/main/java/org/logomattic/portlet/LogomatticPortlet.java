@@ -26,6 +26,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.portlet.PortletFileUpload;
 import org.chromattic.api.Chromattic;
 import org.chromattic.api.ChromatticBuilder;
+import org.logomattic.portlet.LogomatticContext;
 import org.logomattic.integration.CurrentRepositoryLifeCycle;
 import org.logomattic.model.Content;
 import org.logomattic.model.Directory;
@@ -160,7 +161,7 @@ public class LogomatticPortlet extends GenericPortlet
    @Override
    public void render(RenderRequest request, RenderResponse response) throws PortletException, IOException
    {
-      Model model = new Model(chromattic);
+      LogomatticContext model = new LogomatticContext(chromattic, request, response);
 
       //
       try
