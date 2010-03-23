@@ -104,6 +104,13 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <warName>logomattic</warName>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>1.0-beta-1</version>
         <executions>
@@ -135,8 +142,8 @@
             <configuration>
               <tasks>
                 <copy
-                tofile="${HOME}/java/gatein/portal/trunk/packaging/pkg/target/tomcat/webapps/logomattic.war"
-                file="${project.build.directory}/${project.build.finalName}.war">
+                todir="${HOME}/java/gatein/portal/trunk/packaging/pkg/target/tomcat/webapps/"
+                file="${project.build.directory}/logomattic.war">
                 </copy>
               </tasks>
             </configuration>
