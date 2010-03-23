@@ -29,6 +29,8 @@ import org.chromattic.api.annotations.Property;
 import java.util.Date;
 
 /**
+ * Models an <code>nt:hierarchyNode</code> node.
+ *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
@@ -36,17 +38,44 @@ import java.util.Date;
 public abstract class File 
 {
 
+   /**
+    * Returns the file id.
+    *
+    * @return the file id
+    */
    @Id
    public abstract String getId();
 
+   /**
+    * Returns the file path.
+    *
+    * @return the file path
+    */
    @Path
    public abstract String getPath();
 
+   /**
+    * Returns the file name.
+    *
+    * @return the file name
+    */
    @Name
    public abstract String getName();
 
+   /**
+    * Returns the directory containing this file.
+    *
+    * @return the parent directory
+    */
+
    @ManyToOne
    public abstract Directory getParent();
+
+   /**
+    * Returns the creation date of this file.
+    *
+    * @return the creation date
+    */
 
    @Property(name = "jcr:created")
    public abstract Date getCreated();

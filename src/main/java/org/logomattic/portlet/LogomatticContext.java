@@ -112,7 +112,7 @@ public class LogomatticContext extends Model
 
    public void save(FileItem image) throws IOException
    {
-      getRoot().save(image.getName(), image.getContentType(), image.getInputStream());
+      getRoot().saveDocument(image.getName(), image.getContentType(), image.getInputStream());
       save();
    }
 }

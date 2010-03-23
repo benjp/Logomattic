@@ -29,6 +29,8 @@ import java.io.InputStream;
 import java.util.Date;
 
 /**
+ * Models an <code>nt:file</code> node.
+ *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
@@ -36,16 +38,37 @@ import java.util.Date;
 public abstract class Document extends File
 {
 
+   /**
+    * Returns the document's content or null if no content is associated with this document.
+    *
+    * @return the document content
+    */
    @OneToOne
    @Owner
    @MappedBy("jcr:content")
-   public abstract Content getContent();
+   protected abstract Content getContent();
 
-   public abstract void setContent(Content content);
+   /**
+    * Set the document content.
+    *
+    * @param content the document content
+    */
+   protected abstract void setContent(Content content);
 
+   /**
+    * Factory method for content object.
+    *
+    * @return a blank content
+    */
    @Create
    protected abstract Content createContent();
 
+   /**
+    * Updates the current document with the specified mime type and data.
+    *
+    * @param mimeType the mime type
+    * @param data the data
+    */
    public void update(String mimeType, InputStream data)
    {
       Content content = getContent();

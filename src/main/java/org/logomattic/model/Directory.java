@@ -19,18 +19,18 @@
 
 package org.logomattic.model;
 
-import org.apache.commons.fileupload.FileItem;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.PrimaryType;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
 /**
+ * Models an <code>nt:folder</code> node.
+ *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
@@ -38,44 +38,93 @@ import java.util.Map;
 public abstract class Directory extends File
 {
 
+   /**
+    * Returns the file children of this directory
+    *
+    * @return the file children
+    */
    @OneToMany
    protected abstract Map<String, File> getFileMap();
 
+   /**
+    * Returns the document children of this directory
+    *
+    * @return the document children
+    */
    @OneToMany
    protected abstract Map<String, Document> getDocumentMap();
 
+   /**
+    * Factory method for document object.
+    *
+    * @return a blank content
+    */
    @Create
    protected abstract Document createDocument();
 
+   /**
+    * Factory method for directory object.
+    *
+    * @return a blank content
+    */
    @Create
    protected abstract Directory createDirectory();
 
+   /**
+    * Returns the collection of file children.
+    *
+    * @return the file children collection
+    */
    public Collection<File> getFiles()
    {
       return getFileMap().values();
    }
 
+   /**
+    * Removes a specified file.
+    *
+    * @param name the file name
+    */
    public void removeFile(String name)
    {
       getFileMap().remove(name);
    }
 
+   /**
+    * Returns a specified document
+    *
+    * @param name the document name
+    * @return the document
+    */
    public Document getDocument(String name)
    {
       return getDocumentMap().get(name);
    }
 
+   /**
+    * Returns the collection of document children.
+    *
+    * @return the document children collection
+    */
    public Collection<Document> getDocuments()
    {
       return getDocumentMap().values();
    }
 
-   public void save(String name, String mimeType, byte[] data)
+   public void saveDocument(String name, String mimeType, byte[] data)
    {
-      save(name, mimeType, new ByteArrayInputStream(data));
+      saveDocument(name, mimeType, new ByteArrayInputStream(data));
    }
 
-   public void save(String name, String mimeType, InputStream data)
+   /**
+    * Saves a document in the current directory. A document is created if none exist otherwise the existing document
+    * is updated.
+    *
+    * @param name the document name
+    * @param mimeType the document mime type
+    * @param data the document data
+    */
+   public void saveDocument(String name, String mimeType, InputStream data)
    {
       Document doc = getDocument(name);
 
@@ -90,6 +139,12 @@ public abstract class Directory extends File
       }
    }
 
+   /**
+    * Creates a sub directory.
+    *
+    * @param name the directory name
+    * @return the created directory
+    */
    public Directory addDirectory(String name)
    {
       Directory dir = createDirectory();
@@ -97,6 +152,14 @@ public abstract class Directory extends File
       return dir;
    }
 
+   /**
+    * Creates a document.
+    *
+    * @param name the document name
+    * @param mimeType the document mime type
+    * @param data the document data
+    * @return the created document
+    */
    public Document addDocument(String name, String mimeType, InputStream data)
    {
       Document doc = createDocument();

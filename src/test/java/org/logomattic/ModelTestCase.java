@@ -84,7 +84,7 @@ public class ModelTestCase extends TestCase
    {
       Model model = new Model(chromattic.openSession());
 
-      model.getRoot().save("1", "image/png", new byte[]{0,1,2});
+      model.getRoot().saveDocument("1", "image/png", new byte[]{0,1,2});
 
       model.save();
 

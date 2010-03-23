@@ -23,6 +23,8 @@ import org.chromattic.api.Chromattic;
 import org.chromattic.api.ChromatticSession;
 
 /**
+ * A facade for accessing the virtual file system.
+ *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
@@ -37,6 +39,11 @@ public class Model
       this.session = session;
    }
 
+   /**
+    * Returns the root directory.
+    *
+    * @return the root directory
+    */
    public Directory getRoot()
    {
       Directory root = session.findByPath(Directory.class, "logomattic");
@@ -48,6 +55,14 @@ public class Model
       return root;
    }
 
+   /**
+    * Removes a document, if the document is not found, then nothing happens and the method returns false.
+    * When the document is removed, then the model is updated, therefore there is no need to invoke the
+    * {@link #save()} method.
+    *
+    * @param docId the document id
+    * @return true when the document was removed
+    */
    public boolean remove(String docId)
    {
       Document doc = session.findById(Document.class, docId);
@@ -60,16 +75,29 @@ public class Model
       return false;
    }
 
+   /**
+    * Find and returns a document with the specified <code>docId</code> method parameter. It returns null if it
+    * cannot find the document.
+    *
+    * @param docId the document id
+    * @return the document
+    */
    public Document findDocumentById(String docId)
    {
       return session.findById(Document.class, docId);
    }
 
+   /**
+    * Saves the changes made to the model.
+    */
    public void save()
    {
       session.save();
    }
 
+   /**
+    * Close the connection to the model.
+    */
    public void close()
    {
       session.close();

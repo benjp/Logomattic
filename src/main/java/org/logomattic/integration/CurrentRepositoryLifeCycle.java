@@ -28,6 +28,8 @@ import javax.jcr.Session;
 import java.lang.reflect.Method;
 
 /**
+ * Integrates Chromattic with the GateIn JCR server. 
+ *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
