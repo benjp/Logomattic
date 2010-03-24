@@ -19,25 +19,39 @@
 
 package org.logomattic;
 
-import org.logomattic.model.Model;
+import junit.framework.TestCase;
+import org.chromattic.api.Chromattic;
+import org.chromattic.api.ChromatticBuilder;
+import org.chromattic.exo.RepositoryBootstrap;
+import org.logomattic.model.Content;
+import org.logomattic.model.Directory;
+import org.logomattic.model.Document;
+import org.logomattic.model.File;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ModelTestCase extends AbstractTestCase
+public abstract class AbstractTestCase extends TestCase
 {
 
-   public void testSimple()
+   /** . */
+   protected Chromattic chromattic;
+
+   @Override
+   protected void setUp() throws Exception
    {
-      Model model = new Model(chromattic.openSession());
+      RepositoryBootstrap bootstrap = new RepositoryBootstrap();
+      bootstrap.bootstrap();
 
-      model.getRoot().saveDocument("1", "image/png", new byte[]{0,1,2});
+      //
+      ChromatticBuilder builder = ChromatticBuilder.create();
+      builder.add(Directory.class);
+      builder.add(Content.class);
+      builder.add(Document.class);
+      builder.add(File.class);
 
-      model.save();
-
-      model.close();
+      //
+      chromattic = builder.build();
    }
-
-
 }

@@ -19,25 +19,37 @@
 
 package org.logomattic;
 
-import org.logomattic.model.Model;
+import org.chromattic.api.ChromatticSession;
+import org.logomattic.model.Directory;
+import org.logomattic.model.Document;
+
+import java.io.ByteArrayInputStream;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ModelTestCase extends AbstractTestCase
+public class ChromatticTestCase extends AbstractTestCase
 {
 
-   public void testSimple()
+   public void testSimple() throws Exception
    {
-      Model model = new Model(chromattic.openSession());
+      ChromatticSession session = chromattic.openSession();
 
-      model.getRoot().saveDocument("1", "image/png", new byte[]{0,1,2});
+      //
+      Directory dir = session.insert(Directory.class, "logos");
+      assertEquals("logos", dir.getName());
+      assertEquals(0, dir.getFiles().size());
 
-      model.save();
+      //
+      Document logo = dir.addDocument("mylogo", "image/png", new ByteArrayInputStream(new byte[]{0, 1, 2}));
+      assertEquals(dir, logo.getParent());
 
-      model.close();
+      //
+      assertEquals(1, dir.getFiles().size());
+      assertTrue(dir.getFiles().contains(logo));
+
+      //
+      session.close();
    }
-
-
 }
