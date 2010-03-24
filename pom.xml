@@ -132,28 +132,38 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.1</version>
-        <executions>
-          <execution>
-            <id>copy-warfile</id>
-            <phase>package</phase>
-            <configuration>
-              <tasks>
-                <copy
-                todir="${HOME}/java/gatein/portal/trunk/packaging/pkg/target/tomcat/webapps/"
-                file="${project.build.directory}/logomattic.war">
-                </copy>
-              </tasks>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>      
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>deploy</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <id>copy-warfile</id>
+                <phase>package</phase>
+                <configuration>
+                  <tasks>
+                    <copy
+                    todir="${HOME}/java/gatein/portal/trunk/packaging/pkg/target/tomcat/webapps/"
+                    file="${project.build.directory}/logomattic.war">
+                    </copy>
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
     
 </project>
