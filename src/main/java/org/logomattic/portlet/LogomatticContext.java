@@ -43,7 +43,7 @@ public class LogomatticContext extends Model
 {
 
    /** . */
-   private static final String WORKSPACE_NAME = "portal-work";
+   private static final String WORKSPACE_NAME = "portal-system";
 
    /** . */
    private PortletRequest request;
