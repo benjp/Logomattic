@@ -26,13 +26,11 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.portlet.PortletFileUpload;
 import org.chromattic.api.Chromattic;
 import org.chromattic.api.ChromatticBuilder;
-import org.logomattic.portlet.LogomatticContext;
 import org.logomattic.integration.CurrentRepositoryLifeCycle;
 import org.logomattic.model.Content;
 import org.logomattic.model.Directory;
 import org.logomattic.model.Document;
 import org.logomattic.model.File;
-import org.logomattic.model.Model;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

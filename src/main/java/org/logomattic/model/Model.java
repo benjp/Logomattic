@@ -46,10 +46,10 @@ public class Model
     */
    public Directory getRoot()
    {
-      Directory root = session.findByPath(Directory.class, "logomattic");
+      Directory root = session.findByPath(Directory.class, "images");
       if (root == null)
       {
-          root = session.insert(Directory.class, "logomattic");
+          root = session.insert(Directory.class, "images");
           session.save();
       }
       return root;
