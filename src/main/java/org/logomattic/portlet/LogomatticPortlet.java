@@ -57,9 +57,16 @@ public class LogomatticPortlet extends GenericPortlet
    /** . */
    private Chromattic chromattic;
 
+   /** . */
+   private String workspaceName;
+
    @Override
    public void init() throws PortletException
    {
+      workspaceName = parameter("workspace-name");
+      String rootNodePath = parameter("root-node-path");
+
+      //
       ChromatticBuilder builder = ChromatticBuilder.create();
       builder.add(Directory.class);
       builder.add(Content.class);
@@ -69,7 +76,7 @@ public class LogomatticPortlet extends GenericPortlet
       //
       builder.setOptionValue(ChromatticBuilder.SESSION_LIFECYCLE_CLASSNAME, CurrentRepositoryLifeCycle.class.getName());
       builder.setOptionValue(ChromatticBuilder.CREATE_ROOT_NODE, true);
-      builder.setOptionValue(ChromatticBuilder.ROOT_NODE_PATH, "/");
+      builder.setOptionValue(ChromatticBuilder.ROOT_NODE_PATH, rootNodePath);
 
       //
       chromattic = builder.build();
@@ -78,7 +85,7 @@ public class LogomatticPortlet extends GenericPortlet
    @Override
    public void processAction(ActionRequest request, ActionResponse response) throws PortletException, IOException
    {
-      LogomatticContext model = new LogomatticContext(chromattic, request, response);
+      LogomatticContext model = new LogomatticContext(chromattic, workspaceName, request, response);
       try
       {
          if (PortletFileUpload.isMultipartContent(request))
@@ -162,7 +169,7 @@ public class LogomatticPortlet extends GenericPortlet
    @Override
    public void render(RenderRequest request, RenderResponse response) throws PortletException, IOException
    {
-      LogomatticContext model = new LogomatticContext(chromattic, request, response);
+      LogomatticContext model = new LogomatticContext(chromattic, workspaceName, request, response);
 
       //
       try
@@ -189,5 +196,15 @@ public class LogomatticPortlet extends GenericPortlet
    {
       PortletRequestDispatcher dispatcher = getPortletContext().getRequestDispatcher("/WEB-INF/jsp/edit.jsp");
       dispatcher.include(request, response);
+   }
+
+   private String parameter(String parameterName) throws PortletException
+   {
+      String parameter = getPortletConfig().getInitParameter(parameterName);
+      if (parameter == null)
+      {
+         throw new PortletException("Portlet is not configured with parameter " + parameterName);
+      }
+      return parameter.trim();
    }
 }

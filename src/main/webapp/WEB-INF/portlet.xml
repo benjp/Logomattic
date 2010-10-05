@@ -39,6 +39,14 @@
       <short-title>Logomattic</short-title>
       <keywords>System</keywords>
     </portlet-info>
+    <init-param>
+      <name>root-node-path</name>
+      <value>/logomattic</value>
+    </init-param>
+    <init-param>
+      <name>workspace-name</name>
+      <value>portal-system</value>
+    </init-param>
   </portlet>
 
 </portlet-app>
